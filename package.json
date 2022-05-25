@@ -1,0 +1,37 @@
+{
+  "name": "react-org-chart",
+  "version": "1.0.0",
+  "description": "Proyecto de organigrama",
+  "main": "index.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "react-router-dom": "^6.3.0",
+    "react-scripts": "^5.0.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "d3": "^3.5.17",
+    "d3-save-svg": "^0.0.2",
+    "jspdf": "^2.5.1",
+    "react-d3": "^0.4.0"
+  }
+}
