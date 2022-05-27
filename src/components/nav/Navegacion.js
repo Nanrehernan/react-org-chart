@@ -22,7 +22,7 @@ export default class Navegacion extends Component {
                                 <Link className="nav-link" to="/departamento">Departamento</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/organigrama">Organigrama</Link>
+                                <Link className="nav-link" to="/proyecto">Proyecto</Link>
                             </li>
                         </ul>
                     </div>

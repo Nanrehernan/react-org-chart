@@ -1,11 +1,11 @@
 import { Component } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navegacion from "./Navegacion";
-import Inicio from "./Inicio";
-import Organigrama from "./Organigrama";
-import OrganigramaProyecto from "./OrganigramaProyecto";
-import Funcionario from "./Funcionario";
-import Departamento from "./Departamento";
+import Navegacion from "./components/nav/Navegacion";
+import Inicio from "./components/home/Inicio";
+import Organigrama from "./components/proyecto/Organigrama";
+import OrganigramaProyecto from "./components/proyecto/OrganigramaProyecto";
+import Funcionario from "./components/funcionario/Funcionario";
+import Departamento from "./components/departamento/Departamento";
 import "./App.css";
 
 export default class App extends Component {
@@ -75,7 +75,7 @@ export default class App extends Component {
                         <Route path="/documentacion" />
                         <Route path="/funcionarios" element={<Funcionario />} />
                         <Route path="/departamento" element={<Departamento />} />
-                        <Route path="/organigrama" element={
+                        <Route path="/proyecto" element={
                             <div className="row">
                                 <div className="col-9">
                                     <Organigrama cargar={this.state.cargar} datos={this.state.datos} funcion={this.setEscribir} />

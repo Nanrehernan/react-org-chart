@@ -1,6 +1,6 @@
 import { Component } from "react";
-import OrgChart from "./lib/react/org-chart"
-import avatarPersonnel from "./assets/avatar-personnel.svg";
+import OrgChart from "../../lib/react/org-chart"
+//import avatarPersonnel from "./assets/avatar-personnel.svg"
 
 export default class Organigrama extends Component {
     constructor(props) {
@@ -28,7 +28,7 @@ export default class Organigrama extends Component {
         let nodo = {
             id: persona.id,
             person: {
-                avatar: avatarPersonnel,
+                avatar: null,
                 departament: persona.departament,
                 name: persona.name,
                 title: persona.title,
@@ -52,7 +52,7 @@ export default class Organigrama extends Component {
                     let nodo = {
                         id: p.id,
                         person: {
-                            avatar: avatarPersonnel,
+                            avatar: null,
                             departament: p.departament,
                             name: p.name,
                             title: p.title,
