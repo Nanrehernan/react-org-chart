@@ -1,8 +1,8 @@
 const jsPDF = require('jspdf')
 
-module.exports = exportOrgChartPdf
+//module.exports = exportOrgChartPdf
 
-function exportOrgChartPdf({ loadConfig }) {
+export function exportOrgChartPdf({ loadConfig }) {
   const config = loadConfig()
   const {
     id,

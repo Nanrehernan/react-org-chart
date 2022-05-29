@@ -12,7 +12,8 @@
     </g>
     */
 
-module.exports = function iconLink({ svg, x = 5, y = 5 }) {
+//module.exports = function iconLink({ svg, x = 5, y = 5 }) {
+export function iconLink({ svg, x = 5, y = 5 }) {
   const container = svg
     .append('g')
     .attr('stroke', 'none')

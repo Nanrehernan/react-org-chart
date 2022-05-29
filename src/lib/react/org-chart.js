@@ -1,7 +1,7 @@
 const { createElement, PureComponent } = require('react')
 const { init } = require('../chart/index')
 
-class OrgChart extends PureComponent {
+export default class OrgChart extends PureComponent {
   render() {
     const { id } = this.props
     return createElement('div', {
@@ -43,4 +43,4 @@ class OrgChart extends PureComponent {
   }
 }
 
-module.exports = OrgChart;
+//module.exports = OrgChart;

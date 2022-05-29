@@ -1,8 +1,8 @@
-const d3 = require('d3')
+//const d3 = require('d3')
 
-module.exports = exportOrgChartImage
+//module.exports = exportOrgChartImage
 
-function exportOrgChartImage({ loadConfig }) {
+export function exportOrgChartImage({ loadConfig }) {
   const config = loadConfig()
   const { id, downlowdedOrgChart, nodeLeftX, nodeRightX, nodeY } = config
   var w = nodeLeftX + nodeRightX

@@ -2,10 +2,9 @@ import { Component } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Navegacion from "./components/nav/Navegacion";
 import Inicio from "./components/home/Inicio";
-import Organigrama from "./components/proyecto/Organigrama";
-import OrganigramaProyecto from "./components/proyecto/OrganigramaProyecto";
-import Funcionario from "./components/funcionario/Funcionario";
-import Departamento from "./components/departamento/Departamento";
+import Funcionario from "./components/funcionario/App";
+import Departamento from "./components/departamento/App";
+import Proyecto from "./components/proyecto/App"
 import "./App.css";
 
 export default class App extends Component {
@@ -65,29 +64,18 @@ export default class App extends Component {
 
     render() {
         return (
-            <div className="container-fluid">
-                <Router>
+            <Router>
+                <div className="container-fluid">
                     <Navegacion />
-
                     <Routes>
-                        <Route path="/react-org-chart" element={<Inicio />} />
                         <Route path="/" element={<Inicio />} />
                         <Route path="/documentacion" />
                         <Route path="/funcionarios" element={<Funcionario />} />
                         <Route path="/departamento" element={<Departamento />} />
-                        <Route path="/proyecto" element={
-                            <div className="row">
-                                <div className="col-9">
-                                    <Organigrama cargar={this.state.cargar} datos={this.state.datos} funcion={this.setEscribir} />
-                                </div>
-                                <div className="col-3">
-                                    <OrganigramaProyecto name={this.state.name} />
-                                </div>
-                            </div>
-                        } />
+                        <Route path="/proyecto" element={<Proyecto />} />
                     </Routes>
-                </Router>
-            </div>
+                </div>
+            </Router>
         );
     }
 }

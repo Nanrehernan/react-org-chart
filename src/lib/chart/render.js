@@ -41,7 +41,7 @@ function render(config) {
     elemWidth,
     margin,
     onConfigChange,
-    funcion
+    handleInformacion
   } = config;
 
 
@@ -81,7 +81,7 @@ function render(config) {
     .insert('g')
     .attr('class', CHART_NODE_CLASS)
     .attr('transform', `translate(${parentNode.x0}, ${parentNode.y0})`)
-    //.on('click', onClick(config))
+  //.on('click', onClick(config))
 
   // Person Card Shadow
   nodeEnter
@@ -120,19 +120,33 @@ function render(config) {
   }
 
   // Person's Name
-  nodeEnter
+  if (handleInformacion !== null) {
+    nodeEnter
+      .append('text')
+      .attr('class', PERSON_NAME_CLASS + ' unedited')
+      .attr('x', namePos.x)
+      .attr('y', namePos.y/2)
+      .attr('dy', '.3em')
+      .style('cursor', 'pointer')
+      .style('fill', nameColor)
+      .style('font-size', 20)
+      .text(d => d.person.name)
+    // .on('click', onParentClick(config))
+  }else{
+    nodeEnter
     .append('text')
     .attr('class', PERSON_NAME_CLASS + ' unedited')
     .attr('x', namePos.x)
-    .attr('y', namePos.y / 2)
+    .attr('y', namePos.y)
     .attr('dy', '.3em')
     .style('cursor', 'pointer')
     .style('fill', nameColor)
     .style('font-size', 20)
     .text(d => d.person.name)
   // .on('click', onParentClick(config))
+  }
 
-  // Person's Title
+  /*/ Person's Title
   nodeEnter
     .append('text')
     .attr('class', PERSON_TITLE_CLASS + ' unedited')
@@ -142,21 +156,24 @@ function render(config) {
     .style('font-size', 12)
     .style('cursor', 'pointer')
     .style('fill', titleColor)
-    .text(d => d.person.title)
+    .text(d => d.person.title)*/
 
   // Person's Departament
-  nodeEnter
-    .append('text')
-    .attr('class', PERSON_TITLE_CLASS + ' unedited')
-    .attr('x', nodeWidth / 2)
-    .attr('y', namePos.y + nodePaddingY * 3.5)
-    .attr('dy', '0.1em')
-    .style('font-size', 12)
-    .style('cursor', 'pointer')
-    .style('fill', titleColor)
-    //.text(d => d.person.departament)
-    .text("Ver mas Informacion")
-    .on('click', d => funcion(d))
+  if (handleInformacion !== null) {
+    nodeEnter
+      .append('text')
+      .attr('class', PERSON_TITLE_CLASS + ' unedited')
+      .attr('x', nodeWidth / 2)
+      .attr('y', namePos.y + nodePaddingY * 1.5)
+      .attr('dy', '0.1em')
+      .style('font-size', 12)
+      .style('cursor', 'pointer')
+      .style('fill', titleColor)
+      //.text(d => d.person.departament)
+      .text("Ver mas Informacion")
+      .on('click', d => handleInformacion(d))
+  }
+
 
   const heightForTitle = 60 // getHeightForText(d.person.title)
 

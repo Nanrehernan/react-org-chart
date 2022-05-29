@@ -9,12 +9,13 @@ const onParentClick = require('../onParentClick')
 
 // }
 module.exports = function supervisorIcon({
+//export function supervisorIcon({
   svg,
   config,
   treeData,
   x = 5,
   y = 5,
-}) {
+}){
   const container = svg
     .append('g')
     .attr('id', 'supervisorIcon')
