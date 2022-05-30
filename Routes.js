@@ -1,8 +1,7 @@
 const express = require("express");
-const ruta = express.Router();
+const route = express.Router();
 
-// Rutas para la seccion de funcionarios
-// Listar Funcionarios
-ruta.get("/funcionario/listar", (req, res)=>{
-    
-})
+// Funcionarios
+route.get("/funcionario/listar", (req, res)=>{});
+
+//route.post("/funcionario/insertar", (req, res)=>{});

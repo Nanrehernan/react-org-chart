@@ -18,7 +18,7 @@ export default class Departamento extends Component {
             mensaje: "Cargando Datos. Espere..."
         })
         
-        const url = "http://localhost:9000/api/departamento/listar"
+        const url = "http://localhost:9000/departamento/listar"
 
         fetch(url)
             .then(response => response.json())

@@ -5,41 +5,90 @@ export default class FormFuncionario extends Component {
         super(props)
 
         this.state = {
-            id: "",
-            nombre: "",
-            departamento: "",
-            cargo: "",
-            fechaInicio: ""
+            funcionario: {
+                id: "",
+                nombre: "",
+                departamento: "Principal",
+                cargo: "",
+                fechaInicio: ""
+            },
+            datos: []
         }
     }
     handleChangeState = (e) => {
         const { name, value } = e.target;
 
         this.setState({
-            ...this.state,
-            [name]: value
+            funcionario: {
+                ...this.state.funcionario,
+                [name]: value
+            }
         });
     }
 
-    setFuncionario = (e)=>{
+    setFuncionario = (e) => {
         e.preventDefault();
 
-        const url = "http://localhost:9000/api/funcionario/insertar";
+        const { departamento } = this.state.funcionario;
+
+        const url = "http://localhost:9000/funcionario/insertar";
+
+        if (departamento === "Principal") {
+            alert("Seleccione un Departamento");
+            return;
+        }
 
         const formData = new FormData();
-        formData.append("funcionario", JSON.stringify(this.state));
+        formData.append("funcionario", JSON.stringify(this.state.funcionario));
 
-        const xhttp = new XMLHttpRequest();
-        xhttp.onload = ()=>{
-            //this.props.getFuncionario();
-        };
-        xhttp.open("post", url, true);
-        xhttp.send(formData);
-        e.target.reset();
+        fetch(url, { method: "post", body: formData })
+            .then(response => response.json())
+            .then(response => {
+                const { mensaje } = response;
+
+                if (mensaje === "Ok"){
+                    this.props.getFuncionario();
+                }
+            })
+
+        this.resetForm();
+    }
+
+    resetForm = () => {
+        this.setState({
+            funcionario: {
+                id: "",
+                nombre: "",
+                departamento: "Principal",
+                cargo: "",
+                fechaInicio: ""
+            }
+        });
+    }
+
+    getDepartamento = () => {
+        const url = "http://localhost:9000/departamento/listar"
+
+        fetch(url)
+            .then(response => response.json())
+            .then(response => {
+                const { mensaje, datos } = response
+
+                if (mensaje === "Ok" && datos.length > 0) {
+                    this.setState({
+                        datos: datos
+                    })
+                }
+            })
+    }
+
+    componentDidMount() {
+        this.getDepartamento();
     }
 
     render() {
-        const { nombre, departamento, cargo, fechaInicio } = this.state
+        const { nombre, departamento, cargo, fechaInicio } = this.state.funcionario
+        const { datos } = this.state;
 
         return (
             <div className="card" style={{ position: "sticky", top: "45px" }}>
@@ -50,17 +99,26 @@ export default class FormFuncionario extends Component {
                     <form onSubmit={this.setFuncionario}>
                         <div className="form-group">
                             <label className="form-label">Nombre y Apellido</label>
-                            <input type="text" name="nombre" className="form-control" onChange={this.handleChangeState} value={nombre} />
+                            <input type="text" name="nombre" className="form-control" onChange={this.handleChangeState} value={nombre} autoComplete="off"/>
                         </div>
 
                         <div className="form-group">
                             <label className="form-label">Departamento</label>
-                            <input type="text" name="departamento" className="form-control" onChange={this.handleChangeState} value={departamento} />
+                            <select className="form-select" name="departamento" value={departamento} onChange={this.handleChangeState}>
+                                <option value="Principal">Seleccione un Departamento</option>
+                                {
+                                    datos.map(d => {
+                                        return (
+                                            <option key={d.id} value={d.id}>{d.name}</option>
+                                        )
+                                    })
+                                }
+                            </select>
                         </div>
 
                         <div className="form-group">
-                            <label className="form-label">Profesion</label>
-                            <input type="text" name="cargo" className="form-control" onChange={this.handleChangeState} value={cargo} />
+                            <label className="form-label">Cargo</label>
+                            <input type="text" name="cargo" className="form-control" onChange={this.handleChangeState} value={cargo} autoComplete="off"/>
                         </div>
 
                         <div className="form-group">
@@ -69,7 +127,7 @@ export default class FormFuncionario extends Component {
                         </div>
 
                         <div className="form-group mt-4">
-                            <input type="submit" value="Guardar" className="btn btn-outline-success m-0 w-100"/>
+                            <input type="submit" value="Guardar" className="btn btn-outline-success m-0 w-100" />
                         </div>
                     </form>
                 </div>

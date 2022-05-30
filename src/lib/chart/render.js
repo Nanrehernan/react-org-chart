@@ -129,7 +129,7 @@ function render(config) {
       .attr('dy', '.3em')
       .style('cursor', 'pointer')
       .style('fill', nameColor)
-      .style('font-size', 20)
+      .style('font-size', 15)
       .text(d => d.person.name)
     // .on('click', onParentClick(config))
   }else{
@@ -164,7 +164,7 @@ function render(config) {
       .append('text')
       .attr('class', PERSON_TITLE_CLASS + ' unedited')
       .attr('x', nodeWidth / 2)
-      .attr('y', namePos.y + nodePaddingY * 1.5)
+      .attr('y', namePos.y + nodePaddingY * 2.5)
       .attr('dy', '0.1em')
       .style('font-size', 12)
       .style('cursor', 'pointer')

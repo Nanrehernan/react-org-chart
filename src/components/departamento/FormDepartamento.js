@@ -21,26 +21,46 @@ export default class FormDepartamento extends Component {
 
     setDepartamento = (e) => {
         e.preventDefault()
-        const url = "http://localhost:9000/api/departamento/insertar"
+        const url = "http://localhost:9000/departamento/insertar"
+        const {datos} = this.props;
+        const {idParent} = this.state;
 
-        let { departamento, idParent } = this.state.departamento
-
-        if (idParent === "Principal") {
-            idParent = 1
+        if (datos.length > 0 && idParent === "Principal"){
+            alert("El Nodo Principal ya fue definido");
+            return;
+        }else if(datos.length === 0 && idParent === "Principal"){
+            this.setState({
+                ...this.state,
+                idParent: 1
+            })
         }
+
+        const departamento = this.state;
 
         let formData = new FormData()
-        formData.append("departamento", departamento)
+        formData.append("departamento", JSON.stringify(departamento))
 
-        const xhttp = new XMLHttpRequest()
-        xhttp.onload = () => {
-            this.props.getDepartamento();
-        }
-        xhttp.open("post", url, true)
-        xhttp.send(formData)
+        fetch(url, {method: "post", body: formData})
+        .then(response => response.json())
+        .then(response =>{
+            const {mensaje, datos} = response
 
-        e.target.reset()
+            if (mensaje === "Ok"){
+                this.props.getDepartamento();
+                this.formReset();
+            }
+        })
+
+        
     }
+
+    formReset = ()=>{
+        this.setState({
+            departamento: "",
+            idParent: "Principal"
+        })
+    }
+
     render() {
         const { datos } = this.props;
         const {departamento, idParent} = this.state;
@@ -52,7 +72,7 @@ export default class FormDepartamento extends Component {
                 </div>
 
                 <div className="card-body">
-                    <form onSubmit={this.props.setDepartamento}>
+                    <form onSubmit={this.setDepartamento}>
                         <div className="form-group">
                             <label className="form-label">Departamento</label>
                             <input type="text" name="departamento" autoComplete="off" className="form-control" onChange={this.handleChangeDepartamento} value={departamento}/>
@@ -60,8 +80,8 @@ export default class FormDepartamento extends Component {
 
                         <div className="form-group">
                             <label className="form-label">Supervisado por</label>
-                            <select className="form-select" name="idParent" defaultValue={idParent} onChange={this.handleChangeDepartamento}>
-                                <option value="Principal">Principal</option>
+                            <select className="form-select" name="idParent" value={idParent} onChange={this.handleChangeDepartamento}>
+                                <option value="Principal">Nodo Principal</option>
                                 {
                                     datos.map(d => {
                                         return (

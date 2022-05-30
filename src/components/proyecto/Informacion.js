@@ -2,12 +2,63 @@ import React, { Component, Fragment } from "react";
 import NuevoProyecto from "./NuevoProyecto";
 
 export default class Informacion extends Component {
-    getFuncionario = () =>{}
+    constructor(props) {
+        super(props)
 
-    getProyecto = () =>{}
+        this.state = {
+            funcionario: [],
+            proyecto: []
+        }
+    }
+    getFuncionario = (idDepartamento) => {
+        const url = `http://localhost:9000/funcionario/listar/${idDepartamento}`
+
+        fetch(url)
+            .then(response => response.json())
+            .then(response => {
+                const { mensaje, datos } = response
+
+                if (mensaje === "Ok") {
+                    this.setState({
+                        ...this.state,
+                        funcionario: datos
+                    })
+                }
+            })
+    }
+
+    getProyecto = (idDepartamento) => {
+        const url = `http://localhost:9000/proyecto/listar/${idDepartamento}`
+
+        fetch(url)
+            .then(response => response.json())
+            .then(response => {
+                const { mensaje, datos } = response
+
+                if (mensaje === "Ok") {
+                    this.setState({
+                        ...this.state,
+                        proyecto: datos
+                    })
+                }
+            })
+    }
+
+    componentDidUpdate(props, state) {
+        if (props !== this.props) {
+            const { id } = this.props.informacion
+
+            if (!(id === "")) {
+                this.getFuncionario(id);
+                this.getProyecto(id);
+            }
+        }
+    }
 
     render() {
-        const {name} = this.props.informacion
+        const { id, name } = this.props.informacion
+        const { funcionario, proyecto } = this.state
+
         return (
             <Fragment>
                 <div className="card mt-2">
@@ -17,21 +68,43 @@ export default class Informacion extends Component {
                         <div className="accordion-item">
                             <h2 className="accordion-header" id="flush-headingOne">
                                 <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                    Funcionarios <span>(10)</span>
+                                    Funcionarios <span>({funcionario.length})</span>
                                 </button>
                             </h2>
                             <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                                <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the first item's accordion body.</div>
+                                <div className="accordion-body">
+                                    <ul>
+                                        {
+                                            funcionario.map(f => {
+                                                return (
+                                                    <li key={f.id}>{f.nombre}</li>
+                                                )
+                                            })
+                                        }
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div className="accordion-item">
                             <h2 className="accordion-header" id="flush-headingTwo">
                                 <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                    Proyectos <span className="">(10)</span>
+                                    Proyectos <span className="">({proyecto.length})</span>
                                 </button>
                             </h2>
                             <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
-                                <div className="accordion-body">Placeholder content for this accordion, which is intended to demonstrate the <code>.accordion-flush</code> class. This is the second item's accordion body. Let's imagine this being filled with some actual content.</div>
+                                <div className="accordion-body">
+                                    {
+                                        proyecto.map(p => {
+                                            return (
+                                                <div className="card" key={p.id}>
+                                                    <div className="card-body">
+                                                        <p>Nombre Proyecto: {p.nombre}</p>
+                                                    </div>
+                                                </div>
+                                            )
+                                        })
+                                    }
+                                </div>
                             </div>
                         </div>
                         <div className="accordion-item">
@@ -42,7 +115,7 @@ export default class Informacion extends Component {
                             </h2>
                             <div id="flush-collapseThree" className="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
                                 <div className="accordion-body">
-                                    <NuevoProyecto />
+                                    <NuevoProyecto idDepartamento={id} getProyecto={this.getProyecto}/>
                                 </div>
                             </div>
                         </div>
