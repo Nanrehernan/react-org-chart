@@ -1,11 +1,11 @@
 const d3 = require('d3')
 const { wrapText, helpers, covertImageToBase64 } = require('../utils')
-const renderLines = require('./renderLines')
-const exportOrgChartImage = require('./exportOrgChartImage')
-const exportOrgChartPdf = require('./exportOrgChartPdf')
-const onClick = require('./onClick')
-const iconLink = require('./components/iconLink')
-const supervisorIcon = require('./components/supervisorIcon')
+const {renderLines} = require('./renderLines')
+const {exportOrgChartImage} = require('./exportOrgChartImage')
+const {exportOrgChartPdf} = require('./exportOrgChartPdf')
+const {onClick} = require('./onClick')
+const {iconLink} = require('./components/iconLink')
+const {supervisorIcon} = require('./components/supervisorIcon')
 const CHART_NODE_CLASS = 'org-chart-node'
 const PERSON_LINK_CLASS = 'org-chart-person-link'
 const PERSON_NAME_CLASS = 'org-chart-person-name'

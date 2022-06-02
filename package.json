@@ -4,6 +4,7 @@
   "description": "Proyecto de organigrama",
   "main": "index.js",
   "scripts": {
+    "ok": "nodemon index.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "dev": "npm run build",
@@ -13,6 +14,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "nodemon": "^2.0.16",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-router-dom": "^6.3.0",
@@ -37,6 +39,7 @@
     "express-fileupload": "^1.4.0",
     "express-myconnection": "^1.0.4",
     "jspdf": "^2.5.1",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "path": "^0.12.7"
   }
 }

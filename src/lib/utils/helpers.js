@@ -1,10 +1,10 @@
-module.exports = {
+/*module.exports = {
   getTextForTitle,
   getTextForDepartment,
   getCursorForNode,
-}
+}*/
 
-function getTextForTitle(datum) {
+export function getTextForTitle(datum) {
   if (!datum.person || !datum.person.totalReports) {
     return ''
   }
@@ -31,7 +31,7 @@ const departmentAbbrMap = {
   Sales: 'sales',
 }
 
-function getTextForDepartment(datum) {
+export function getTextForDepartment(datum) {
   if (!datum.person.department) {
     return ''
   }
@@ -45,7 +45,7 @@ function getTextForDepartment(datum) {
   return datum.person.department.substring(0, 3).toUpperCase()
 }
 
-function getCursorForNode(datum) {
+export function getCursorForNode(datum) {
   return datum.children || datum._children || datum.hasChild
     ? 'pointer'
     : 'default'

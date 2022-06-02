@@ -27,7 +27,7 @@ const nameColor = '#222d38'
 const titleColor = '#617080'
 const reportsColor = '#92A0AD'
 
-const config = {
+export const config = {
   margin,
   animationDuration,
   nodeWidth,
@@ -47,4 +47,4 @@ const config = {
   shouldResize,
 }
 
-module.exports = config
+//module.exports = config

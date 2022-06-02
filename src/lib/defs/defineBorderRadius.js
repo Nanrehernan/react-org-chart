@@ -6,7 +6,8 @@ const defaultConfig = {
   radius: 1
 }
 
-module.exports = function defineBorderRadius(svg, id, config = {}) {
+//module.exports = function defineBorderRadius(svg, id, config = {}) {
+export function defineBorderRadius(svg, id, config = {}) {
   config = {
     ...defaultConfig,
     ...config

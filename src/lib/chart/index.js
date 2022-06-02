@@ -1,15 +1,19 @@
+import { collapseNode } from '../utils/collapse'
+
 const d3 = require('d3')
-const { collapse, wrapText, helpers } = require('../utils')
-const defineBoxShadow = require('../defs/defineBoxShadow')
-const defineAvatarClip = require('../defs/defineAvatarClip')
+const { wrapText, helpers } = require('../utils')
+const {defineBoxShadow} = require('../defs/defineBoxShadow')
+const {defineAvatarClip} = require('../defs/defineAvatarClip')
 const render = require('./render')
-const defaultConfig = require('./config')
+const {config} = require('./config')
+const defaultConfig = config
+const collapse = collapseNode
 
-module.exports = {
+/*module.exports = {
   init,
-}
+}*/
 
-function init(options) {
+export function init(options) {
   // Merge options with the default config
   const config = {
     ...defaultConfig,

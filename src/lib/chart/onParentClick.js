@@ -1,6 +1,6 @@
-module.exports = onParentClick
+//module.exports = onParentClick
 
-function onParentClick(configOnClick, children) {
+export function onParentClick(configOnClick, children) {
   event.preventDefault()
 
   const { loadConfig } = configOnClick

@@ -1,4 +1,4 @@
-const onParentClick = require('../onParentClick')
+const {onParentClick} = require('../onParentClick')
 // {
 //   <svg width="33" height="47" viewBox="0 0 33 47" xmlns="http://www.w3.org/2000/svg">
 //     <g transform="translate(1 1)" fill="none" fill-rule="evenodd">
@@ -8,8 +8,8 @@ const onParentClick = require('../onParentClick')
 //       <circle stroke="#979797" fill="#9C9C9C" cx="22" cy="16" r="2"/></g></svg>
 
 // }
-module.exports = function supervisorIcon({
-//export function supervisorIcon({
+//module.exports = function supervisorIcon({
+export function supervisorIcon({
   svg,
   config,
   treeData,

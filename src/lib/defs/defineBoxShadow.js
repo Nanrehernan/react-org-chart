@@ -6,7 +6,8 @@ const defaultConfig = {
   blurRadius: 1,
 }
 
-module.exports = function defineBoxShadow(svg, id, config = {}) {
+//module.exports = function defineBoxShadow(svg, id, config = {}) {
+export function defineBoxShadow(svg, id, config = {}) {
   config = {
     ...defaultConfig,
     ...config,

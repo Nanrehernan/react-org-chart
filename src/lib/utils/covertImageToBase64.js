@@ -1,6 +1,6 @@
-module.exports = covertImageToBase64
+//module.exports = covertImageToBase64
 
-function covertImageToBase64(src, callback, outputFormat) {
+export function covertImageToBase64(src, callback, outputFormat) {
   var img = new Image()
   img.crossOrigin = 'Anonymous'
   img.onload = function () {

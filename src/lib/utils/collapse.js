@@ -1,4 +1,5 @@
-module.exports = function collapseNode(node) {
+//module.exports = function collapseNode(node) {
+export function collapseNode(node) {
   // Check if this node has children
   if (node.children) {
     node._children = node.children

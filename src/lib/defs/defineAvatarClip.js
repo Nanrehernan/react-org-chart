@@ -2,7 +2,8 @@ const defaultConfig = {
   borderRadius: 4,
 }
 
-module.exports = function defineAvatarClip(svg, id, config = {}) {
+//module.exports = function defineAvatarClip(svg, id, config = {}) {
+export function defineAvatarClip(svg, id, config = {}) {
   config = {
     ...defaultConfig,
     ...config,

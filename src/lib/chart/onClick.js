@@ -1,9 +1,11 @@
 const d3 = require('d3')
-const { collapse } = require('../utils')
+//const { collapse } = require('../utils')
+import { collapseNode } from '../utils/collapse'
+const collapse = collapseNode
 
-module.exports = onClick
+//module.exports = onClick
 
-function onClick(configOnClick) {
+export function onClick(configOnClick) {
   const { loadConfig } = configOnClick
 
   return datum => {

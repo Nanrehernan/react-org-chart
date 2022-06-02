@@ -4,6 +4,7 @@ const myconnection = require("express-myconnection");
 const cors = require("cors");
 const fileupload = require("express-fileupload");
 const dboptions = require("./dboptions");
+const path = require("path");
 
 const app = express();
 app.set("port", process.env.PORT || 9000);
@@ -12,9 +13,10 @@ app.use(express.json());
 app.use(fileupload());
 app.use(cors({ origin: "*" }));
 app.use(myconnection(mysql, dboptions, "single"));
+app.use(express.static(path.join(__dirname, "build")))
 
 app.get("/", (req, res)=>{
-    res.send("Hello");
+    res.sendFile(path.join(__dirname, "build", "index.html"))
 });
 
 // Departamento
