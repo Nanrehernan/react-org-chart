@@ -27,6 +27,7 @@ export default class NuevoProyecto extends Component{
             alert("Selecciona el Departamento");
             return;
         }
+        
         const url = `http://localhost:9000/proyecto/insertar/${idDepartamento}`;
         const {nombre, fechaInicio, descripcion} = this.state;
         

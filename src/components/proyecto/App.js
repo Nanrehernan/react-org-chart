@@ -14,7 +14,7 @@ export default class App extends Component {
             },
             informacion: {
                 id: "",
-                name: "Departamento"
+                name: "Departamento?"
             }
         }
     }
@@ -53,6 +53,7 @@ export default class App extends Component {
     }
 
     handleInformacion = (nodo) => {
+        console.log("Click")
         const { name } = nodo.person
         const { id } = nodo
 
@@ -71,7 +72,6 @@ export default class App extends Component {
     render() {
         const { cargar, datos, mensaje } = this.state.org
         const informacion = this.state.informacion
-
         return (
             <div className="row">
                 <div className="col-9">

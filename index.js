@@ -182,8 +182,8 @@ app.get("/proyecto/listar/:id", (req, res)=>{
             return res.json(respuesta)
         }
 
-        const query = "select p.id as id, p.nombre as nombre, p.descripcion as descripcion, p.fechaInicio as fechaInicio from proyecto as p join departamento as d on p.id_departamento=d.id";
-        conexion.query(query, (error, row)=>{
+        const query = "select p.id as id, p.nombre as nombre, p.descripcion as descripcion, p.fechaInicio as fechaInicio from proyecto as p join departamento as d on p.id_departamento=d.id where d.id=?";
+        conexion.query(query, [id], (error, row)=>{
             if (error){
                 respuesta.mensaje = error.mensaje;
                 return res.json(respuesta)

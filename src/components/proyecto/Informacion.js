@@ -10,6 +10,14 @@ export default class Informacion extends Component {
             proyecto: []
         }
     }
+
+    resetState = ()=>{
+        this.setState({
+            funcionario: [],
+            proyecto: []
+        })
+    }
+
     getFuncionario = (idDepartamento) => {
         const url = `http://localhost:9000/funcionario/listar/${idDepartamento}`
 
@@ -68,7 +76,7 @@ export default class Informacion extends Component {
                         <div className="accordion-item">
                             <h2 className="accordion-header" id="flush-headingOne">
                                 <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-                                    Funcionarios <span>({funcionario.length})</span>
+                                    Funcionarios <span className="text-primary" style={{marginLeft: "10px"}}>({funcionario.length})</span>
                                 </button>
                             </h2>
                             <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
@@ -77,7 +85,7 @@ export default class Informacion extends Component {
                                         {
                                             funcionario.map(f => {
                                                 return (
-                                                    <li key={f.id}>{f.nombre}</li>
+                                                    <li key={f.id}>{f.nombre} {" "}({f.cargo})</li>
                                                 )
                                             })
                                         }
@@ -88,17 +96,29 @@ export default class Informacion extends Component {
                         <div className="accordion-item">
                             <h2 className="accordion-header" id="flush-headingTwo">
                                 <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
-                                    Proyectos <span className="">({proyecto.length})</span>
+                                    Proyectos <span className="text-primary" style={{marginLeft: "10px"}}>({proyecto.length})</span>
                                 </button>
                             </h2>
                             <div id="flush-collapseTwo" className="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
                                 <div className="accordion-body">
                                     {
                                         proyecto.map(p => {
+                                            let fecha = new Date(p.fechaInicio);
+                                            const day = fecha.toLocaleString("es", {day: "numeric"})
+                                            const month = fecha.toLocaleString("es", {month: "short"})
+                                            const year = fecha.toLocaleString("es", {year: "numeric"})
+                                            const weekday = fecha.toLocaleString("es", {weekday: "short"})
+                                            //let fechaActual = new Date();
+
+                                            //fecha = fechaActual - fecha;
+                                            //fecha =  Math.floor(fecha / (1000 * 60 * 60 * 24))
+                                            
                                             return (
-                                                <div className="card" key={p.id}>
+                                                <div className="card mb-3" key={p.id}>
                                                     <div className="card-body">
-                                                        <p>Nombre Proyecto: {p.nombre}</p>
+                                                        <p><span style={{textDecoration: "underline"}}>Proyecto:</span> <span className="text-uppercase" style={{fontWeight: "bold"}}>{p.nombre}</span></p>
+                                                        <p><span style={{textDecoration: "underline"}}>Fecha Inicio:</span> {weekday + "," + day + "," + month + "," + year}</p>
+                                                        <p><span style={{textDecoration: "underline"}}>Descripcion:</span> {p.descripcion}</p>
                                                     </div>
                                                 </div>
                                             )
